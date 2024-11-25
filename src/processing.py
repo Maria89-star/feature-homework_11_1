@@ -28,5 +28,3 @@ def sort_by_date(list_of_dict: list[dict[str, Any]], reverse: bool = True) -> li
         reverse=reverse,
     )
     return sorted_list
-
-
