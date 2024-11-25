@@ -25,7 +25,7 @@ def transaction_descriptions(info_list):
 
 def card_number_generator(start, stop):
     """
-    Функция, генерирующая номера банковских карт в заданном 16-значном формате
+    Функция, генерирующая номера банковских карт в заданном формате
     """
     if start > stop:
 
