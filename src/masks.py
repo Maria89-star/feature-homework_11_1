@@ -1,7 +1,3 @@
-account_num = input()
-card_number_str = input()
-
-
 def get_mask_card_number(card_number: str) -> str:
     """Функция маскирующая номер карты"""
 

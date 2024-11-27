@@ -16,8 +16,6 @@ print(mask_account_card("Счет 64686473678894779589"))
 print(mask_account_card("Visa Platinum 7000792289606361"))
 print(mask_account_card("Maestro 7000792289606361"))
 
-date_ = input()
-
 
 def get_date(date: str) -> str:
     """Функция вывода даты в общепринятом формате"""
