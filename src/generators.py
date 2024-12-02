@@ -1,47 +1,39 @@
-def filter_by_currency(info_list, currency):
-    """
-    Функция, находящая операции в заданной валюте
-    """
-    result_by_currency = (x for x in info_list if x["operationAmount"]["currency"]["code"] == currency)
-    first_item = next(result_by_currency, None)
-
-    if first_item is None:
-        raise ValueError("Операции в заданной валюте не найдены")
-
-    yield first_item
-    yield from result_by_currency
+from typing import Iterator, List
 
 
-def transaction_descriptions(info_list):
-    """
-    Функция, выводящая описания операций из списка
-    """
-    if len(info_list) == 0:
-        raise ValueError("Нет транзакций")
-
-    for x in info_list:
-        yield x["description"]
+def filter_by_currency(transaction_list: List[dict], name: str) -> Iterator[dict]:
+    """Функция выдает список трансакций с определенной валютой"""
+    for transaction in transaction_list:
+        if transaction.get("operationAmount").get("currency").get("name") == name:
+            yield transaction
 
 
-def card_number_generator(start, stop):
-    """
-    Функция, генерирующая номера банковских карт в заданном формате
-    """
-    if start > stop:
+def transaction_descriptions(transactions_list):
+    """Функция выдает описание операций"""
+    description_of_transactions = ""
+    for transact in transactions_list:
+        description_of = transact["description"]
+        description_of_transactions = (
+            description_of_transactions + description_of + "/n"
+        )
+    description_of_transactions_list = description_of_transactions.split("/n")
+    for transaction in description_of_transactions_list:
+        yield transaction
 
-        raise ValueError("Ошибка: Start не должен превышать Stop")
 
-    else:
+def card_number_generator(start: int, end: int) -> str:
+    """Функция генерирует номера карт"""
+    for number in range(start, end + 1):
+        card_number = str(number)
+        while len(card_number) < 16:
+            card_number = "0" + card_number
 
-        for number in range(start, stop + 1):
+        formatted_card_number = f"{card_number[:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}"
 
-            number_str = str(number)
+        yield (formatted_card_number)
 
-            if len(str(number)) < 16:
-                card_number_not_formatted = "0" * (16 - len(str(number))) + str(number)
-            else:
-                card_number_not_formatted = number_str
 
-            card_number = f"{card_number_not_formatted[:4]} {card_number_not_formatted[4:8]} {card_number_not_formatted[8:12]} {card_number_not_formatted[12:]}"
-
-            yield card_number
+# gen_number = card_number_generator(1,3)
+# print(next(gen_number))
+# print(next(gen_number))
+# print(next(gen_number))
