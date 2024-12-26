@@ -1,47 +1,38 @@
 import logging
 
-# Создаем основные конфигурации logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s %(name)s %(levelname)s %(message)s",
-    filename="masks.log",
-    filemode="w",
-    encoding="utf-8",
-)
-# Создаем логи для отдельных функций
-card_number_logger = logging.getLogger("app.card_number")
-mask_account_logger = logging.getLogger("app.mask_account")
+logger = logging.getLogger('masks')
+file_handler = logging.FileHandler('../logs/masks.log', encoding='utf-8')
+file_formatter = logging.Formatter('%(asctime)s %(filename)s %(levelname)s: %(message)s')
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+logger.setLevel(logging.DEBUG)
 
 
-def get_mask_card_number(card_number: str) -> str:
-    """Функция маскирует часть номера карты"""
-    card_number_logger.info("Ввод номера карты")
-    if len(card_number) < 16:
-        card_number_logger.error("Недостаточное количество цифр")
-        return "Ошибка: проверьте количество вводимых цифр"
+def get_mask_card_number(card: str) -> str:
+    """ Функция, которая маскирует номер карты"""
+
+    logger.info(f'Проверяем точно ли введенные данные карты ровны 16 символам')
+    if len(card) == 16:
+        return f"{card[:4]} {card[4:6]}{'*' * 2} {'*' * 4} {card[12:]}"
     else:
-        mask_card_number = (
-            f"{card_number[:4]} {card_number[4:6]}** **** {card_number[-4:]}"
-        )
-    card_number_logger.info("Маскировка номера карты")
-    return mask_card_number
+        logger.error(f'Введенные данные не корректны')
+        return ""
 
 
-print(get_mask_card_number("7000792289606361"))
-print(get_mask_card_number("70007922896"))
+if __name__ == '__main__':
+    print(get_mask_card_number("8990922113665229"))
 
 
-def get_mask_account(account_number: str) -> str:
-    """Функция маскирует часть номеа счета"""
-    mask_account_logger.info("Ввод номера счета")
-    if len(account_number) < 20:
-        mask_account_logger.error("Недостаточное количество цифр")
-        return "Ошибка: проверьте количество вводимых цифр"
+def get_mask_account(acc_number: str) -> str:
+    """Функция, которая возврашает маску счета"""
+
+    logger.info(f'Проверяем точно ли введенные номера счета ровны 20 символам')
+    if len(acc_number) == 20:
+        return f"{'*' * 2}{acc_number[-4:]}"
     else:
-        mask_account = f"**{account_number[-4:]}"
-        mask_account_logger.info("Маскировка номера счета")
-    return mask_account
+        logger.error(f'Введенные данные не корректны')
+        return ""
 
 
-print(get_mask_card_number("7000792289606361"))
-print(get_mask_account("73654108430135874305"))
+if __name__ == '__main__':
+    print(get_mask_account("73654108430135874305"))

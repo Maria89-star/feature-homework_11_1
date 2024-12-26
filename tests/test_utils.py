@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.utils import file_opening
+from src.utils import get_operations_info
 
 
 @pytest.fixture
@@ -17,12 +17,12 @@ def path_to_file_empty():
     return os.path.join(os.path.dirname(__file__), "data", "operations_empty.json")
 
 
-def test_file_opening_empty(path_to_file_empty):
-    assert file_opening(path_to_file_empty) == []
+def test_get_operations_info_empty(path_to_file_empty):
+    assert get_operations_info(path_to_file_empty) == []
 
 
-def test_file_opening(path_to_file):
-    assert file_opening(path_to_file)[0] == {
+def test_get_operations_info(path_to_file):
+    assert get_operations_info(path_to_file)[0] == {
         "id": 41428829,
         "state": "EXECUTED",
         "date": "2019-07-03T18:35:29.512364",
