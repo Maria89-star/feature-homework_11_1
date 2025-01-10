@@ -21,4 +21,3 @@ def get_amount(transaction: dict) -> float:
         return result["result"]
     else:
         return float(amount)
-

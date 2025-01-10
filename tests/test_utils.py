@@ -34,4 +34,3 @@ def test_get_operations_info(path_to_file):
         "from": "MasterCard 7158300734726758",
         "to": "Счет 35383033474447895560",
     }
-

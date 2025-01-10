@@ -13,9 +13,7 @@ def transaction_descriptions(transactions_list):
     description_of_transactions = ""
     for transact in transactions_list:
         description_of = transact["description"]
-        description_of_transactions = (
-            description_of_transactions + description_of + "/n"
-        )
+        description_of_transactions = description_of_transactions + description_of + "/n"
     description_of_transactions_list = description_of_transactions.split("/n")
     for transaction in description_of_transactions_list:
         yield transaction

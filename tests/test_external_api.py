@@ -50,4 +50,3 @@ def test_get_amount_mock(mock_get, transaction_fix):
         "result": 271230.83615,
     }
     assert get_amount(transaction_fix) == 271230.83615
-

@@ -49,4 +49,3 @@ def test_log_print_fail_try(tmp_path):
     with open(log_file, "r") as f:
         content = f.read()
     assert content == "my_function error: division by zero. Inputs: (10, 0), {}"
-
