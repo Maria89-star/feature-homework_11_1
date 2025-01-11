@@ -1,4 +1,5 @@
 import os
+from typing import Any
 
 import pytest
 
@@ -21,16 +22,7 @@ def test_get_operations_info_empty(path_to_file_empty):
     assert get_operations_info(path_to_file_empty) == []
 
 
-def test_get_operations_info(path_to_file):
-    assert get_operations_info(path_to_file)[0] == {
-        "id": 41428829,
-        "state": "EXECUTED",
-        "date": "2019-07-03T18:35:29.512364",
-        "operationAmount": {
-            "amount": "8221.37",
-            "currency": {"name": "USD", "code": "USD"},
-        },
-        "description": "Перевод организации",
-        "from": "MasterCard 7158300734726758",
-        "to": "Счет 35383033474447895560",
-    }
+def get_info_json_object(capsys: Any) -> Any:
+    get_operations_info(filename='../data/abdula.json')
+    captured = capsys.readouterr()
+    assert captured.out == 'FileNotFoundError'

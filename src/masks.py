@@ -11,11 +11,11 @@ logger.setLevel(logging.DEBUG)
 def get_mask_card_number(card: str) -> str:
     """Функция, которая маскирует номер карты"""
 
-    logger.info(f"Проверяем точно ли введенные данные карты ровны 16 символам")
+    logger.info("Проверяем точно ли введенные данные карты ровны 16 символам")
     if len(card) == 16:
         return f"{card[:4]} {card[4:6]}{'*' * 2} {'*' * 4} {card[12:]}"
     else:
-        logger.error(f"Введенные данные не корректны")
+        logger.error("Введенные данные не корректны")
         return ""
 
 
@@ -26,11 +26,11 @@ if __name__ == "__main__":
 def get_mask_account(acc_number: str) -> str:
     """Функция, которая возврашает маску счета"""
 
-    logger.info(f"Проверяем точно ли введенные номера счета ровны 20 символам")
+    logger.info("Проверяем точно ли введенные номера счета ровны 20 символам")
     if len(acc_number) == 20:
         return f"{'*' * 2}{acc_number[-4:]}"
     else:
-        logger.error(f"Введенные данные не корректны")
+        logger.error("Введенные данные не корректны")
         return ""
 
 
