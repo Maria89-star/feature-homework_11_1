@@ -14,7 +14,7 @@ def get_amount(transaction: dict) -> float:
     code = transaction["operationAmount"]["currency"]["code"]
     if transaction["operationAmount"]["currency"]["code"] != "RUB":
         response = requests.get(
-            f"https://api.apilayer.com/exchangerates_data/convert?to={"RUB"}&from={code}&amount={amount}",
+            f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={code}&amount={amount}",
             headers={"apikey": f"{API_KEY}"},
         )
         result = response.json()
