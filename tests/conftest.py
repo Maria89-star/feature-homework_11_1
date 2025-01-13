@@ -94,3 +94,4 @@ def test_dict_list_incorrect_date_second_version():
         {"id": 939719570, "state": "EXECUTED", "date": "30.06.2018"},
         {"id": 594226727, "state": "CANCELED", "date": "12/09/2017 21;42"},
     ]
+
